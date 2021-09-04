@@ -8,10 +8,9 @@ class Cliente:
         self.endereco = endereco
         
     def print(self):
-        print("ID: ", self.id)
-        print("Nome: ", self.nome)
-        print("CPF: ", self.cpf)
-        print("Telefone: ", self.telefone)
-        print("Email: ", self.email)
-        print("Endereço :", self.endereco)
-
+        info = [self.id, self.nome, self.cpf, self.telefone, self.email, self.endereco]
+        print(info)
+        
+    def getInfo(self):
+        info = [self.id, self.nome]
+        return info
