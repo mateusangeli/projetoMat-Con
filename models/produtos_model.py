@@ -3,10 +3,10 @@ from utils.produto import Produto
 import models.database as db
 
 # PEGA TODOS OS Produto DO BANCO DE DADOS
-def getProduto():
+def getProdutos():
     conn = db.connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM Produto;")
+    cursor.execute("SELECT * FROM Produtos;")
     lista_Produto = []
     for l in cursor.fetchall():
         id = l[0]
@@ -24,7 +24,7 @@ def getProduto():
 def getProduto(id):
     conn = db.connect_db()
     cursor = conn.cursor()
-    sql = """SELECT * FROM Produto WHERE ID = ?;"""
+    sql = """SELECT * FROM Produtos WHERE ID = ?;"""
     cursor.execute(sql, [id])
     l = cursor.fetchall()[0]
     id = l[0]
@@ -41,7 +41,7 @@ def getProduto(id):
 def addProduto(produto):
     conn = db.connect_db()
     cursor = conn.cursor()
-    sql = """INSERT INTO Produto (nome, marca, descricao, precocompra, precovenda, quantidade) VALUES (?, ?, ?, ?, ?, ?);"""
+    sql = """INSERT INTO Produtos (nome, marca, descricao, precocompra, precovenda, quantidade) VALUES (?, ?, ?, ?, ?, ?);"""
     cursor.execute(sql,[produto.nome, produto.marca, produto.descricao, produto.precocompra, produto.precovenda, produto.quantidade])
     conn.commit()
     conn.close()
@@ -49,7 +49,7 @@ def addProduto(produto):
 def editProduto(produto):
     conn = db.connect_db()
     cursor = conn.cursor()
-    sql = """UPDATE Produto SET nome = ?, marca = ?, descricao = ?, precocompra = ?, precovenda = ?, quantidade = ? WHERE id = ?"""
+    sql = """UPDATE Produtos SET nome = ?, marca = ?, descricao = ?, precocompra = ?, precovenda = ?, quantidade = ? WHERE id = ?"""
     cursor.execute(sql,[produto.nome, produto.marca, produto.descricao, produto.precocompra, produto.precovenda, produto.quantidade])
     conn.commit()
     conn.close()
@@ -57,7 +57,7 @@ def editProduto(produto):
 def delProduto(id):
     conn = db.connect_db()
     cursor = conn.cursor()
-    sql = """ DELETE FROM Produto WHERE id = ?"""
+    sql = """ DELETE FROM Produtos WHERE id = ?"""
     cursor.execute(sql, [id])
     conn.commit()
     conn.close()

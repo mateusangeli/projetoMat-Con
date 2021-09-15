@@ -53,8 +53,8 @@ def getCliente(id):
 def addCliente(cliente):
     conn = db.connect_db()
     cursor = conn.cursor()
-    sql = """ INSER INTO Clientes (nome, cpf, telefone, email, endereco) VALUES (?,?,?,?,?); """
-    cursor.execute(sql,[cliente.nome, cliente.cpf, cliente.telefone, cliente.email, cliente.endereco, cliente.id])
+    sql = """ INSERT INTO Clientes (nome, cpf, telefone, email, endereco) VALUES (?,?,?,?,?); """
+    cursor.execute(sql,[cliente.nome, cliente.cpf, cliente.telefone, cliente.email, cliente.endereco])
     # GRAVA OS DADOS NO BANCO DE DADOS
     conn.commit()
     conn.close()
@@ -72,7 +72,7 @@ def editCliente(cliente):
 def delCliente(id):
     conn = db.connect_db()
     cursor = conn.cursor()
-    sql = """ DELETE FROM cliente WHERE id = ?"""
+    sql = """ DELETE FROM Clientes WHERE id = ?"""
     cursor.execute(sql, [id])
     # GRAVA OS DADOS NO BANCO DE DADOS
     conn.commit()

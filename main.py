@@ -1,42 +1,40 @@
-# ARQUIVO PRINCIPAL
-import models.produtos_model as ProdModel
-import models.clientes_model as CliModel
-from utils.venda import Venda
-import os
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5 import uic
+
+from ui.ui_produtos import CadProdutos
+from ui.ui_clientes import CadClientes
+from ui.ui_vendas import NovaVenda
+
+from qt_material import apply_stylesheet
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("mainwindow.ui", self)
+        # define os eventos dos botões
+        self.listWidget.insertItem(0, "PRODUTOS")
+        self.listWidget.insertItem(1, "CLIENTES")
+        self.listWidget.insertItem(2, "NOVA VENDA")
+        self.listWidget.insertItem(3, "LISTA DE VENDAS")
+
+        # Stacked
+        self.stackedWidget.addWidget(CadProdutos()) # Pág 0
+        self.stackedWidget.addWidget(CadClientes()) # Pág 1
+        self.stackedWidget.addWidget(NovaVenda()) # PAG 3
+
+        #evento para selecionar a página
+        self.listWidget.currentRowChanged.connect(self.display)
+
+    def display(self, index):
+        self.stackedWidget.setCurrentIndex(index)
 
 
-def printProdutos(lista):
-    for l in lista:
-        l.printInfo()
+app = QApplication(sys.argv)
+#aplicar o tema no programa
+apply_stylesheet(app, theme='dark_red.xml')
 
-os.system('clear')
-id_cliente = int(input("Digite o id do cliente: "))
-cliente = CliModel.getCliente(id_cliente)
-lista_produtos = ProdModel.getProdutos()
-venda = Venda(-1, id_cliente)
-while(True):
-    os.system('clear')
-    print("Cliente: ", cliente.nome)
-    print("Quantidade de itens no carrinho: ", venda.qtdItens())
+window = MainWindow()
+window.show()
 
-    #LISTA PRODUTOS
-    print("\n\nLista de produtos: ")
-    printProdutos(lista_produtos)
-
-    # ESCOLHER O PRODUTO
-    id_produto = int(input("Digite o id do produto: "))
-    # ADICIONA ESSE PRODUTO NA LISTA DE VENDAS ( CARRINHO DE COMPRAS )
-    produto = ProdModel.getProduto(id_produto)
-    venda.addItem(produto)
-
-    op = input("\n\nPara finalizar a compra digite [S]: ")
-    if (op.upper() == 'S'):
-        break
-
-os.system('clear')
-print("\n\nVenda finalizada")
-print("Lista de itens: ")
-prods = venda.getItens()
-lista_produtos(prods)
-
-print("\nValor Total: ", venda.valorTotal())
+app.exec()
