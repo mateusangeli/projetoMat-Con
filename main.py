@@ -8,6 +8,14 @@ from ui.ui_vendas import NovaVenda
 
 from qt_material import apply_stylesheet
 
+'''def tema(app):
+    breeze_light = 'style/light/stylesheet.qss'
+    breeze_dark = 'style/dark/stylesheet.qts'
+    meu_style = 'style/my_style.qss'
+    with open (meu_style, 'r') as f:
+        style = f.read
+        app.setStyleSheet(style)'''
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -17,17 +25,20 @@ class MainWindow(QMainWindow):
         self.listWidget.insertItem(1, "CLIENTES")
         self.listWidget.insertItem(2, "NOVA VENDA")
         #self.listWidget.insertItem(3, "LISTA DE VENDAS")
+
+        self.listWidget.setCurrentRow(0)
+        self.carregaJanelas()
+        self.listWidget.currentRowChanged.connect(self.display)
         
 
-        # Stacked
-        self.stackedWidget.insertWidget(CadProdutos()) # Pág 0
-        self.stackedWidget.insertWidget(CadClientes()) # Pág 1
-        self.stackedWidget.insertWidget(NovaVenda()) # PAG 3
+    def carregaJanelas(self):
+        self.stackedWidget.insertWidget(0, CadProdutos()) # Pág 0
+        self.stackedWidget.insertWidget(1, CadClientes()) # Pág 1
+        self.stackedWidget.insertWidget(2, NovaVenda()) # PAG 3
 
-        #evento para selecionar a página
-        self.listWidget.currentRowChanged.connect(self.display)
 
     def display(self, index):
+        self.carregaJanelas()
         self.stackedWidget.setCurrentIndex(index)
 
 

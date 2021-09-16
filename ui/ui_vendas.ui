@@ -288,7 +288,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="btn_remover_itens">
+            <widget class="QPushButton" name="btn_remover_item">
              <property name="text">
               <string>Remover Item</string>
              </property>

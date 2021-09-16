@@ -1,16 +1,22 @@
 class Venda:
-    def __init__(self, quantidade, produto):
-        self.quantidade = quantidade
-        self.produto = produto
+    def __init__(self, id, cliente):
+        self.id = -1
+        self.cliente = cliente
+        self.produtos = []
 
-    def getNomeProduto(self):
-        return self.produto.nome
+    def addItem(self, item):
+        self.produtos.append(item)
 
-    def getValorUnitario(self):
-        return self.produto.precovenda
+    def qtdItens(self):
+        return len(self.produtos)
 
-    def getValor(self):
-        return float(self.produto.precovenda) * float(self.quantidade)
+    def getItens(self):
+        return self.produtos
 
+    def valorTotal(self):
+        soma = 0
+        for i in self.produtos:
+            soma += i.precovenda
+        return soma
 
 

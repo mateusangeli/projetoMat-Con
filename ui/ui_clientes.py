@@ -65,4 +65,8 @@ class CadClientes(QWidget):
         self.email.setText("")
         self.endereco.setText("")
         self.b_salvar.setText("Salvar")
-        self.b_excluir.setEnabled(False)
+        self.b_excluir.setEnabled(False)   
+  
+    def excluirItem(self):
+        self.table.delete(self.clienteAtual)
+        self.limparCampos()
