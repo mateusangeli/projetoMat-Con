@@ -74,7 +74,7 @@ class TabelaClientes(QTableWidget):
 
     def atualizar(self, cliente):
         ClienteModel.editCliente(cliente)
-        self.carregaDados
+        self.carregaDados()
 
     def excluir(self, cliente):
         ClienteModel.delCliente(cliente.id)

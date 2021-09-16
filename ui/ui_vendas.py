@@ -13,7 +13,7 @@ class NovaVenda(QWidget):
         self.produtoAtual = None
         self.lista_clientes = []
         self.lista_produtos = []
-        self.setEventos()
+        #self.setEventos()
         self.carregaDadosClientes()
         self.carregaDadosProdutos
         self.tabelaItens = TebelaItens(self.tableWidget)
@@ -31,4 +31,26 @@ class NovaVenda(QWidget):
         for p in self.lista_produtos:
             lista_combo.append(str(p.id) + " - "+p.nomeP)
         self.combo_produtos.addItems(lista_combo)
+
+    def setEventos(self):
+        self.combo_clientes.currentIndexChanged.connect(self.index_changed_cliente)
+        self.combo_produtos.currentIndexChanged.connect(self.index_changed_produto)
+        self.btn_add_item.clicked.connect(self.addItem)
+
+    def index_changed_cliente(self, i):
+        print(self.lista_clientes[i].nome)
+        self.clienteAtual = self.lista_clientes[i]
+        self.id_lineEdit.setText(str(self.lista_clientes[i].id))
+
+    def index_changed_produto(self, i):
+        self.produtoAtual = self.lista_produtos[i]
+        self.marca.setText(self.lista_produtos[i].marca)
+        self.valor.setText(str(self.lista_produtos[i].precovenda))
+        self.qtd_disp.setText(str(self.lista_produtos[i].quantidade))
+        self.desc.setText(self.lista_produtos[i].descricao)
+
+    def addItem(self):
+        item = Venda(self.qtd.text(),self.produtoAtual)
+        self.tabelaItens._addRow(item)
+
             

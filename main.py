@@ -16,12 +16,13 @@ class MainWindow(QMainWindow):
         self.listWidget.insertItem(0, "PRODUTOS")
         self.listWidget.insertItem(1, "CLIENTES")
         self.listWidget.insertItem(2, "NOVA VENDA")
-        self.listWidget.insertItem(3, "LISTA DE VENDAS")
+        #self.listWidget.insertItem(3, "LISTA DE VENDAS")
+        
 
         # Stacked
-        self.stackedWidget.addWidget(CadProdutos()) # Pág 0
-        self.stackedWidget.addWidget(CadClientes()) # Pág 1
-        self.stackedWidget.addWidget(NovaVenda()) # PAG 3
+        self.stackedWidget.insertWidget(CadProdutos()) # Pág 0
+        self.stackedWidget.insertWidget(CadClientes()) # Pág 1
+        self.stackedWidget.insertWidget(NovaVenda()) # PAG 3
 
         #evento para selecionar a página
         self.listWidget.currentRowChanged.connect(self.display)

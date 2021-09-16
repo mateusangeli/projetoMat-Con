@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>496</width>
-    <height>767</height>
+    <width>851</width>
+    <height>839</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -60,7 +60,11 @@
          <widget class="QComboBox" name="combo_clientes"/>
         </item>
         <item row="5" column="0">
-         <widget class="QLineEdit" name="id_lineEdit"/>
+         <widget class="QLineEdit" name="id_lineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_2">
@@ -136,7 +140,11 @@
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="marca"/>
+                  <widget class="QLineEdit" name="marca">
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
                  </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_6">
@@ -146,7 +154,11 @@
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="QLineEdit" name="valor"/>
+                  <widget class="QLineEdit" name="valor">
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
                  </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="label_7">
@@ -156,7 +168,11 @@
                   </widget>
                  </item>
                  <item row="2" column="1">
-                  <widget class="QLineEdit" name="qtd_disp"/>
+                  <widget class="QLineEdit" name="qtd_disp">
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
                  </item>
                  <item row="3" column="0">
                   <widget class="QLabel" name="label_8">
@@ -166,7 +182,11 @@
                   </widget>
                  </item>
                  <item row="3" column="1">
-                  <widget class="QTextEdit" name="desc"/>
+                  <widget class="QTextEdit" name="desc">
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
@@ -225,7 +245,7 @@
           <widget class="QTableWidget" name="tableWidget">
            <column>
             <property name="text">
-             <string>Quantidade</string>
+             <string>QTD</string>
             </property>
            </column>
            <column>
@@ -235,12 +255,12 @@
            </column>
            <column>
             <property name="text">
-             <string>Valor unitário</string>
+             <string>Valor UNT</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Valor Total</string>
+             <string>Valor TT</string>
             </property>
            </column>
           </widget>
@@ -277,6 +297,46 @@
           </layout>
          </item>
         </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_6">
+     <property name="title">
+      <string>GroupBox</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_9">
+      <item>
+       <layout class="QFormLayout" name="formLayout_5">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Desconto:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Valor total:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_2"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Finalizar compra</string>
+        </property>
        </widget>
       </item>
      </layout>

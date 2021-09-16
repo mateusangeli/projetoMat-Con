@@ -31,17 +31,19 @@ class CadProdutos(QWidget):
     def getProduto(self):
         nomeP = self.nomeP.text()
         marca = self.marca.text()
+        descricao = self.descricao.text()
         precocompra = self.precocompra.text()
         precovenda = self.precovenda.text()
         quantidade = self.quantidade.text()
-        if((nomeP != "") and (marca != "") and (precocompra != "") and (precovenda != "") and (quantidade != "")):
-            return Produto(id, nomeP, marca, precocompra, precovenda, quantidade)
+        if((nomeP != "") and (marca != "") and (descricao != "") and (precocompra != "") and (precovenda != "") and (quantidade != "")):
+            return Produto(-1, nomeP, marca, descricao, precocompra, precovenda, quantidade)
         return None
             
     def insereInfo(self,produto):
         self.produtoAtual = produto
         self.nomeP.setText(produto.nomeP)
-        self.marca.setText(produto.marca)     
+        self.marca.setText(produto.marca)
+        self.descricao.setText(produto.descricao)
         self.precocompra.setText(produto.precocompra) 
         self.precovenda.setText(produto.precovenda)
         self.quantidade.setText(produto.quantidade)
@@ -55,6 +57,7 @@ class CadProdutos(QWidget):
     def limpaCampos(self):
         self.nomeP.setText("")
         self.marca.setText("")
+        self.descricao.setText("")
         self.precocompra.setText("")
         self.precovenda.setText("")
         self.quantidade.setText("")

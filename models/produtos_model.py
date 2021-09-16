@@ -42,7 +42,7 @@ def addProduto(produto):
     conn = db.connect_db()
     cursor = conn.cursor()
     sql = """INSERT INTO Produtos (nome, marca, descricao, precocompra, precovenda, quantidade) VALUES (?, ?, ?, ?, ?, ?);"""
-    cursor.execute(sql,[produto.nome, produto.marca, produto.descricao, produto.precocompra, produto.precovenda, produto.quantidade])
+    cursor.execute(sql,[produto.nomeP, produto.marca, produto.descricao, produto.precocompra, produto.precovenda, produto.quantidade])
     conn.commit()
     conn.close()
 
@@ -50,7 +50,7 @@ def editProduto(produto):
     conn = db.connect_db()
     cursor = conn.cursor()
     sql = """UPDATE Produtos SET nome = ?, marca = ?, descricao = ?, precocompra = ?, precovenda = ?, quantidade = ? WHERE id = ?"""
-    cursor.execute(sql,[produto.nome, produto.marca, produto.descricao, produto.precocompra, produto.precovenda, produto.quantidade])
+    cursor.execute(sql,[produto.nomeP, produto.marca, produto.descricao, produto.precocompra, produto.precovenda, produto.quantidade, produto.id])
     conn.commit()
     conn.close()
 
