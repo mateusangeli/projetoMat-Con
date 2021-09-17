@@ -45,6 +45,13 @@
        <item row="1" column="1">
         <widget class="QLineEdit" name="marca"/>
        </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Descrição:</string>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
@@ -74,13 +81,6 @@
        </item>
        <item row="5" column="1">
         <widget class="QLineEdit" name="quantidade"/>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Descrição:</string>
-         </property>
-        </widget>
        </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="descricao"/>

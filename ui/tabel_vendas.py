@@ -1,7 +1,7 @@
 from utils.item_venda import ItemVenda
 from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
 
-class TebelaItens(QTableWidget):
+class TebelaItens():
     def __init__(self,tableWidget, parent):
         self.tableWidget = tableWidget
         self.parent = parent
@@ -19,17 +19,15 @@ class TebelaItens(QTableWidget):
             QHeaderView.Stretch)
         self.tableWidget.setEditTriggers(QTableWidget.NoEditTriggers)
         self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
-        self.tableWidget.clicked.connect(self.teste)
+        self.tableWidget.clicked.connect(self.on_click)
 
-    def teste(self):
-        print("asdfas")
 
     def on_click(self):
-        '''selected_row = self.tableWidget.currentRow()
+        selected_row = self.tableWidget.currentRow()
         self.itemAtual = self.listaItens[selected_row]
         print(self.itemAtual)
-        self.parent.btn_remover_item.setEnabled(True)'''
-        print("Clicou")
+        self.parent.btn_remover_item.setEnabled(True)
+
 
     def _addRow(self,item):
         self.listaItens.append(item)
@@ -52,8 +50,7 @@ class TebelaItens(QTableWidget):
         self.parent.btn_limpar_itens.setEnabled(False)
 
     def limparSelecionado(self):
-        print(self.itemAtual)
-        '''self.listaItens.remove(self.itemAtual)
+        self.listaItens.remove(self.itemAtual)
         novaLista = self.listaItens
         
         
@@ -62,5 +59,5 @@ class TebelaItens(QTableWidget):
         self.parent.btn_limpar_itens.setEnabled(True)
         for p in novaLista:
             self._addRow(p)
-'''
+
         

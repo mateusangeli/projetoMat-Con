@@ -67,7 +67,7 @@ class NovaVenda(QWidget):
         self.qtd.setText("")
 
     def limparItens(self):
-        self.tabelaItens.limparItens
+        self.tabelaItens.limparItens()
     
     def limparSelecionado(self):
         self.tabelaItens.limparSelecionado()
