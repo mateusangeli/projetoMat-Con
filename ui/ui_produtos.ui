@@ -18,8 +18,16 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>CADASTRO DE PRODUTOS</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -119,6 +127,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>nomeP</tabstop>
+  <tabstop>marca</tabstop>
+  <tabstop>descricao</tabstop>
+  <tabstop>precocompra</tabstop>
+  <tabstop>precovenda</tabstop>
+  <tabstop>quantidade</tabstop>
+  <tabstop>b_salvar</tabstop>
+  <tabstop>b_excluir</tabstop>
+  <tabstop>b_limpar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

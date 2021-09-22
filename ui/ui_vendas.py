@@ -6,6 +6,8 @@ import models.clientes_model as ClientesModel
 import models.produtos_model as ProdModel
 from ui.tabel_vendas import TebelaItens
 from utils.item_venda import ItemVenda
+from utils.venda import Venda
+import models.vendas_model as VendasModel
 
 class NovaVenda(QWidget):
     def __init__(self):
@@ -18,10 +20,14 @@ class NovaVenda(QWidget):
         self.setEventos()
         self.carregaDadosClientes()
         self.carregaDadosProdutos()
+        self.index_changed_pagamento()
         self.tabelaItens = TebelaItens(self.tableWidget, self)
 
         qtd_validator = QRegExpValidator(QRegExp('^[1-9]{1}[0-9]{5}$'), self.qtd)
         self.qtd.setValidator(qtd_validator)
+
+        desconto_validator = QRegExpValidator(QRegExp('^[0-9]+(\.[0-9]{1,2})?$'), self.desconto)
+        self.desconto.setValidator(desconto_validator)
 
 
     def carregaDadosClientes(self):
@@ -43,10 +49,49 @@ class NovaVenda(QWidget):
             self.index_changed_cliente)
         self.combo_produtos.currentIndexChanged.connect(
             self.index_changed_produto)
+
+
+        self.combo_pagamento.currentIndexChanged.connect(self.atualizaValorTotal)
+        
+        
         self.btn_add_item.clicked.connect(self.addItem)
         self.btn_limpar_itens.clicked.connect(self.limparItens)
         self.btn_remover_item.clicked.connect(self.limparSelecionado)
         self.qtd.textEdited.connect(self.qtd_edited)
+        self.desconto.textEdited.connect(self.atualizaValorTotal)
+        self.finalizaVenda_btn.clicked.connect(self.finalizaVenda)
+        self.novacompra_btn.clicked.connect(self.novaVenda)
+
+    '''def text_changed(self, s):
+        valortotal = self.valortotal.text()
+        if valortotal != "":
+            valortotal = float(valortotal)
+            
+            desconto2 = 0
+            combo = self.combo_pagamento.currentText()
+            if combo == "Dinheiro":
+                desconto2 = valortotal * 0.1
+            elif combo == "Cartão de débito":
+                desconto2 = valortotal * 0.05
+
+            valorTotal = valortotal - desconto2
+            self.valortotal.setText("%.2f" % valorTotal)'''
+
+
+    def index_changed_pagamento(self):
+        self.combo_pagamento.addItem("Dinheiro")
+        self.combo_pagamento.addItem("Cartão de débito")
+        self.combo_pagamento.addItem("Cartão de crédito")
+
+    def novaVenda(self):
+        self.tabelaItens.limparItens()
+        self.valortotal.setText("")
+        self.desconto.setText("")
+
+
+    def atualizaValorTotal(self):
+        print("ok")
+        #self.tabelaItens.calculaValorTotal()
 
     def index_changed_cliente(self, i):
         self.clienteAtual = self.lista_clientes[i]
@@ -66,6 +111,13 @@ class NovaVenda(QWidget):
         self.btn_add_item.setEnabled(False)
         self.qtd.setText("")
 
+    def atualizaListaProdutos(self):
+        self.combo_produtos.clear()
+        lista_combo = []
+        for c in self.lista_produtos:
+            lista_combo.append(c.nome)
+        self.combo_produtos.addItems(lista_combo)
+
     def limparItens(self):
         self.tabelaItens.limparItens()
     
@@ -77,6 +129,18 @@ class NovaVenda(QWidget):
             self.btn_add_item.setEnabled(True)
         else:
             self.btn_add_item.setEnabled(False)
+
+    def finalizaVenda(self):
+        cliente = self.clienteAtual
+        lista_de_itens = self.tabelaItens.listaItens
+        valor_total = self.valortotal.text()
+        # criado o objeto
+        novaVenda = Venda(-1, cliente, lista_de_itens, valor_total)
+        # armazenar no banco
+        VendasModel.addVenda(novaVenda)
+
+        #limpar os campos
+
     
 
             

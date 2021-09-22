@@ -35,7 +35,7 @@ def getProduto(id):
     precovenda = l[5]
     quantidade = l[6]
     novoProduto = Produto(id, nome, marca, descricao, precocompra, precovenda, quantidade)
-    conn.close
+    conn.close()
     return novoProduto
 
 def addProduto(produto):

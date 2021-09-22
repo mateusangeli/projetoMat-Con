@@ -11,3 +11,6 @@ class ItemVenda:
 
     def getValor(self):
         return "%.2f" % (float(self.produto.precovenda) * float(self.quantidade))
+
+    def novaQtd(self):
+        return int("%.2f" % (int(self.produto.quantidade) - int(self.quantidade)))

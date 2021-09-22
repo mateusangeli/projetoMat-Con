@@ -1,22 +1,18 @@
 class Venda:
-    def __init__(self, id, cliente):
-        self.id = -1
+    def __init__(self, id, cliente, lista_de_itens, valortotal):
+        self.id = id
         self.cliente = cliente
-        self.produtos = []
+        self.lista_de_itens = lista_de_itens
+        self.valortotal = valortotal
 
-    def addItem(self, item):
-        self.produtos.append(item)
 
     def qtdItens(self):
-        return len(self.produtos)
+        return len(self.lista_de_itens)
 
     def getItens(self):
-        return self.produtos
+        return self.lista_de_itens
 
     def valorTotal(self):
-        soma = 0
-        for i in self.produtos:
-            soma += i.precovenda
-        return soma
+        return self.valortotal
 
 

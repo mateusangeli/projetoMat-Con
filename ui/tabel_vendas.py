@@ -1,5 +1,5 @@
 from utils.item_venda import ItemVenda
-from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem, QComboBox
 
 class TebelaItens():
     def __init__(self,tableWidget, parent):
@@ -25,7 +25,6 @@ class TebelaItens():
     def on_click(self):
         selected_row = self.tableWidget.currentRow()
         self.itemAtual = self.listaItens[selected_row]
-        print(self.itemAtual)
         self.parent.btn_remover_item.setEnabled(True)
 
 
@@ -41,6 +40,7 @@ class TebelaItens():
         self.tableWidget.setItem(rowCount,1,nome_produto)
         self.tableWidget.setItem(rowCount,2,uni)
         self.tableWidget.setItem(rowCount,3,valor)
+        self.calculaValorTotal()
 
     def limparItens(self):
         self.tableWidget.setRowCount(0)
@@ -51,13 +51,30 @@ class TebelaItens():
 
     def limparSelecionado(self):
         self.listaItens.remove(self.itemAtual)
-        novaLista = self.listaItens
-        
-        
+        novaLista = self.listaItens            
         
         self.limparItens()
         self.parent.btn_limpar_itens.setEnabled(True)
         for p in novaLista:
             self._addRow(p)
+
+    def calculaValorTotal(self):
+        valorTotal = 0
+        desconto = self.parent.desconto.text()
+        if desconto == "":
+            desconto = "0"       
+
+        for item in self.listaItens:
+            valorTotal += (float(item.getValor()))
+        desconto = float(desconto)
+        if desconto < valorTotal:
+            valorTotal = valorTotal - desconto
+       
+
+        self.parent.valortotal.setText("%.2f" % valorTotal)
+
+
+        
+
 
         
