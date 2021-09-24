@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>851</width>
-    <height>907</height>
+    <height>950</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,6 +59,13 @@
         <item row="1" column="0">
          <widget class="QComboBox" name="combo_clientes"/>
         </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>ID</string>
+          </property>
+         </widget>
+        </item>
         <item row="5" column="0">
          <widget class="QLineEdit" name="id_lineEdit">
           <property name="readOnly">
@@ -66,10 +73,17 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_2">
+        <item row="1" column="1">
+         <widget class="QDateEdit" name="dateEdit">
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_13">
           <property name="text">
-           <string>ID</string>
+           <string>Data</string>
           </property>
          </widget>
         </item>
@@ -310,12 +324,15 @@
      <layout class="QVBoxLayout" name="verticalLayout_9">
       <item>
        <layout class="QFormLayout" name="formLayout_5">
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_10">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>Desconto:</string>
+           <string>Pagamento:</string>
           </property>
          </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="combo_pagamento"/>
         </item>
         <item row="1" column="1">
          <widget class="QLineEdit" name="desconto"/>
@@ -328,17 +345,21 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="valortotal"/>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_12">
-          <property name="text">
-           <string>Pagamento:</string>
+         <widget class="QLineEdit" name="valortotal">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QComboBox" name="combo_pagamento"/>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Desconto:</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

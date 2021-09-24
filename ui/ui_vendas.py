@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QRegExp
+from PyQt5.QtCore import QRegExp, QDate
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import uic
@@ -17,17 +17,20 @@ class NovaVenda(QWidget):
         self.produtoAtual = None
         self.lista_clientes = []
         self.lista_produtos = []
-        self.setEventos()
-        self.carregaDadosClientes()
-        self.carregaDadosProdutos()
-        self.index_changed_pagamento()
+        
         self.tabelaItens = TebelaItens(self.tableWidget, self)
+        self.setEventos()
+        self.carregaDadosProdutos()
+        self.carregaDadosClientes()
+        self.index_changed_pagamento()
 
         qtd_validator = QRegExpValidator(QRegExp('^[1-9]{1}[0-9]{5}$'), self.qtd)
         self.qtd.setValidator(qtd_validator)
 
         desconto_validator = QRegExpValidator(QRegExp('^[0-9]+(\.[0-9]{1,2})?$'), self.desconto)
         self.desconto.setValidator(desconto_validator)
+
+        self.dateEdit.setDate(QDate.currentDate())
 
 
     def carregaDadosClientes(self):
@@ -62,20 +65,6 @@ class NovaVenda(QWidget):
         self.finalizaVenda_btn.clicked.connect(self.finalizaVenda)
         self.novacompra_btn.clicked.connect(self.novaVenda)
 
-    '''def text_changed(self, s):
-        valortotal = self.valortotal.text()
-        if valortotal != "":
-            valortotal = float(valortotal)
-            
-            desconto2 = 0
-            combo = self.combo_pagamento.currentText()
-            if combo == "Dinheiro":
-                desconto2 = valortotal * 0.1
-            elif combo == "Cartão de débito":
-                desconto2 = valortotal * 0.05
-
-            valorTotal = valortotal - desconto2
-            self.valortotal.setText("%.2f" % valorTotal)'''
 
 
     def index_changed_pagamento(self):
@@ -90,8 +79,7 @@ class NovaVenda(QWidget):
 
 
     def atualizaValorTotal(self):
-        print("ok")
-        #self.tabelaItens.calculaValorTotal()
+        self.tabelaItens.calculaValorTotal()
 
     def index_changed_cliente(self, i):
         self.clienteAtual = self.lista_clientes[i]
@@ -131,15 +119,17 @@ class NovaVenda(QWidget):
             self.btn_add_item.setEnabled(False)
 
     def finalizaVenda(self):
+        data = self.dateEdit.dateTime().toString('dd/MM/yyyy')
         cliente = self.clienteAtual
         lista_de_itens = self.tabelaItens.listaItens
         valor_total = self.valortotal.text()
         # criado o objeto
-        novaVenda = Venda(-1, cliente, lista_de_itens, valor_total)
+        novaVenda = Venda(-1, cliente, lista_de_itens, valor_total, data)
         # armazenar no banco
         VendasModel.addVenda(novaVenda)
 
         #limpar os campos
+        self.novaVenda()
 
     
 

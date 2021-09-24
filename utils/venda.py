@@ -1,9 +1,10 @@
 class Venda:
-    def __init__(self, id, cliente, lista_de_itens, valortotal):
+    def __init__(self, id, cliente, lista_de_itens, valortotal, data):
         self.id = id
         self.cliente = cliente
         self.lista_de_itens = lista_de_itens
         self.valortotal = valortotal
+        self.data = data 
 
 
     def qtdItens(self):

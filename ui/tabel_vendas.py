@@ -69,7 +69,16 @@ class TebelaItens():
         desconto = float(desconto)
         if desconto < valorTotal:
             valorTotal = valorTotal - desconto
-       
+
+        desconto2 = 0
+        combo = self.parent.combo_pagamento.currentText()
+        if combo == "Dinheiro":
+            desconto2 = valorTotal * 0.1
+        elif combo == "Cartão de débito":
+            desconto2 = valorTotal * 0.05
+
+        valorTotal = valorTotal - desconto2
+      
 
         self.parent.valortotal.setText("%.2f" % valorTotal)
 

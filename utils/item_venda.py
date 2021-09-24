@@ -1,7 +1,8 @@
 class ItemVenda:
-    def __init__(self, quantidade, produto):
+    def __init__(self, quantidade, produto, valor_unitario=None):
         self.quantidade = quantidade
         self.produto = produto
+        self.valor_unitario = valor_unitario
 
     def getNomeProduto(self):
         return self.produto.nomeP
