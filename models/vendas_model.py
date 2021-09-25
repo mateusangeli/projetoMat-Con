@@ -54,11 +54,18 @@ def getVendas():
             produto = ProdModel.getProduto(id_produto)
             item = ItemVenda(qtd, produto, valor_unit)
             lista_de_itens.append(item)
-        
         cliente = ClienteModel.getCliente(id_cliente)
         venda = Venda(id_venda, cliente, lista_de_itens, valor_total, data)
         lista_de_vendas.append(venda)
     conn.close()
     return lista_de_vendas
+
+'''def delVenda(id_venda):
+    conn = db.connect_db()
+    cursor = conn.cursor()
+    sql = """DELETE FROM Venda WHERE id_venda = ?"""
+    cursor.execute(sql, [id_venda])
+    conn.commit()
+    conn.close()'''
 
     #sql = "SELECT v.id, c.nome as cliente, c.telefone, v.valor_total FROM Vendas v, Clientes c WHERE v.id_cliente = c.id"

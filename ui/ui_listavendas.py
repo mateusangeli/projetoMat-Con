@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import QWidget
-from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem, QWidget, QHBoxLayout, QPushButton
 from PyQt5 import uic
+from PyQt5.QtCore import Qt, QSize, QRect
 import models.vendas_model as VendasModel
+
 
 class ListaVendas(QWidget):
     def __init__(self, parent):
@@ -17,16 +19,23 @@ class ListaVendas(QWidget):
 
     def configTable(self):
         self.tableWidget.verticalHeader().setVisible(False)
+        # ajusta a altura das linhas
+        self.tableWidget.verticalHeader().setSectionResizeMode(
+            QHeaderView.ResizeToContents)
+        # ajusta as colunas ao tamanho da tela
         self.tableWidget.horizontalHeader().setStretchLastSection(False)
         self.tableWidget.horizontalHeader().setSectionResizeMode(
-            QHeaderView.Stretch)
+            QHeaderView.ResizeToContents)
+        self.tableWidget.horizontalHeader().setSectionResizeMode(3,
+                                                                 QHeaderView.Stretch)
+
+        # desabilita a edição dos campos
         self.tableWidget.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
-        #self.tableWidget.clicked.connect(self.on_click)
+        # seleciona toda a linha
+        self.tableWidget.setSelectionBehavior(False)
 
     def novaVenda(self):
-        self.parent.display(2)
-        
+        self.parent.display(2)       
 
 
     def carregaVendas(self):
@@ -39,24 +48,20 @@ class ListaVendas(QWidget):
         rowCount = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowCount)
         id = QTableWidgetItem(str(item.id))
-        id_cliente = QTableWidgetItem(str(item.cliente.id))
-        cliente = QTableWidgetItem(item.cliente.nome)
-        #produtos = QTableWidgetItem(venda.lista_de_itens)
-        #qtd = QTableWidgetItem(str(item.quantidade))
-        #valor_unit = QTableWidgetItem(item.getValorUnitario())
-        #valor_total = QTableWidgetItem(item.getValorTotal)
+        id.setTextAlignment(Qt.AlignCenter)
         data = QTableWidgetItem(item.data)
-        self.tableWidget.setItem(rowCount, 0, id)
-        self.tableWidget.setItem(rowCount, 1, id_cliente)
-        self.tableWidget.setItem(rowCount, 2, cliente)
-        #self.tableWidget.setItem(rowCount, 3, qtd)
-        #self.tableWidget.setItem(rowCount, 3, valor_unit)
-        #self.tableWidget.setItem(rowCount, 4, valor_total)
-        self.tableWidget.setItem(rowCount, 5, data)
+        data.setTextAlignment(Qt.AlignCenter)
+        nome = QTableWidgetItem(item.cliente.nome)
+        fone = QTableWidgetItem(item.cliente.telefone)
+        fone.setTextAlignment(Qt.AlignCenter)
+        valor = QTableWidgetItem(str(item.valorTotal()))
+        valor.setTextAlignment(Qt.AlignCenter)
+        self.tableWidget.setItem(rowCount, 1, id)
+        self.tableWidget.setItem(rowCount, 2, data)
+        self.tableWidget.setItem(rowCount, 3, nome)
+        self.tableWidget.setItem(rowCount, 4, fone)
+        self.tableWidget.setItem(rowCount, 5, valor)
 
 
-
-        #rowCount = self.tableWidget.rowCount()
-        #self.tableWidget.insertRow(rowCount)
-
-        #print(len(self.lista_de_vendas))
+    #def excluirVenda(self):
+     #   self.tableWidget.delete(self.vendaAtual)

@@ -33,42 +33,32 @@
     <widget class="QTableWidget" name="tableWidget">
      <column>
       <property name="text">
+       <string>INFO</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>ID VENDA</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>ID CLIENTE</string>
+       <string>DATA</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>NOME</string>
+       <string>NOME DO CLIENTE</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>ID PRODUTO</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>QUANTIDADE</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>VALOR UNITÁRIO</string>
+       <string>TELEFONE</string>
       </property>
      </column>
      <column>
       <property name="text">
        <string>VALOR TOTAL</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>DATA</string>
       </property>
      </column>
     </widget>
@@ -90,6 +80,13 @@
        <widget class="QPushButton" name="delet">
         <property name="text">
          <string>Excluir venda</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Informações da venda</string>
         </property>
        </widget>
       </item>
