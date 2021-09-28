@@ -2,7 +2,11 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem, QWidget, QHBoxLayout, QPushButton
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, QSize, QRect
+from PyQt5.QtGui import QIcon
+from ui.ui_infovendas import InfoVenda
 import models.vendas_model as VendasModel
+
+TYPE = {'remove': 0, 'info': 1}
 
 
 class ListaVendas(QWidget):
@@ -56,12 +60,55 @@ class ListaVendas(QWidget):
         fone.setTextAlignment(Qt.AlignCenter)
         valor = QTableWidgetItem(str(item.valorTotal()))
         valor.setTextAlignment(Qt.AlignCenter)
+
+
+        self.tableWidget.setCellWidget(rowCount, 0, MeuBotao(item, self, TYPE['info']))
         self.tableWidget.setItem(rowCount, 1, id)
         self.tableWidget.setItem(rowCount, 2, data)
         self.tableWidget.setItem(rowCount, 3, nome)
         self.tableWidget.setItem(rowCount, 4, fone)
         self.tableWidget.setItem(rowCount, 5, valor)
+        self.tableWidget.setCellWidget(rowCount, 6, MeuBotao(item, self, TYPE['remove']))
 
 
-    #def excluirVenda(self):
-     #   self.tableWidget.delete(self.vendaAtual)
+class MeuBotao(QWidget):
+    def __init__(self, venda, parent, type):
+        super(MeuBotao, self).__init__()
+        self.venda = venda
+        self.parent = parent
+
+        self.w = None
+        self.btn = QPushButton(self)
+        self.btn.setText("")
+        
+        if type == TYPE['remove']:
+            self.typeDelete()
+        else:
+            self.typeInfo()
+
+        self.btn.setStyleSheet('QPushButton {background-color: #00FFFFFF; border:  none}')
+        layout = QHBoxLayout()
+        layout.setContentsMargins(0, 0, 0, 10)
+        layout.addWidget(self.btn)
+        self.setLayout(layout)
+
+    def typeInfo(self):
+        self.btn.setIcon(QIcon("icons/info.png"))
+        self.btn.clicked.connect(self.maisInfo)
+        self.btn.setToolTip("Mais informações sobre a venda")
+        self.btn.setIconSize(QSize(20,20))
+
+    def typeDelete(self):
+        self.btn.setIcon(QIcon("icons/delete.png"))
+        self.btn.clicked.connect(self.remover)
+        self.btn.setToolTip("Excluir venda")
+        self.btn.setIconSize(QSize(20,20))
+
+    def remover(self):
+        pass
+
+    def maisInfo(self):
+        self.w = InfoVenda(self.venda)
+        self.w.show()
+
+

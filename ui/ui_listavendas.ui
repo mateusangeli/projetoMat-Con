@@ -61,6 +61,11 @@
        <string>VALOR TOTAL</string>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>DEL</string>
+      </property>
+     </column>
     </widget>
    </item>
    <item>
@@ -73,20 +78,6 @@
        <widget class="QPushButton" name="nova_venda">
         <property name="text">
          <string>Nova venda</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="delet">
-        <property name="text">
-         <string>Excluir venda</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Informações da venda</string>
         </property>
        </widget>
       </item>

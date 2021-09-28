@@ -10,6 +10,7 @@ from ui.ui_listavendas import ListaVendas
 
 from qt_material import apply_stylesheet
 
+
 '''def tema(app):
     breeze_light = 'style/light/stylesheet.qss'
     breeze_dark = 'style/dark/stylesheet.qts'

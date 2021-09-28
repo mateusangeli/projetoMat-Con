@@ -7,11 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>513</width>
-    <height>404</height>
+    <height>411</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Informações da venda</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -30,7 +36,11 @@
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QLineEdit" name="data"/>
+         <widget class="QLineEdit" name="data">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_3">
@@ -47,7 +57,11 @@
          </widget>
         </item>
         <item row="3" column="2">
-         <widget class="QLineEdit" name="valortotal"/>
+         <widget class="QLineEdit" name="valortotal">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item row="2" column="1">
          <widget class="QLabel" name="label_2">
@@ -57,10 +71,21 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLineEdit" name="qtd"/>
+         <widget class="QLineEdit" name="qtd">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item row="1" column="0" colspan="3">
-         <widget class="QLineEdit" name="cliente"/>
+         <widget class="QLineEdit" name="cliente">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -80,12 +105,17 @@
         </column>
         <column>
          <property name="text">
-          <string>Valor unitário</string>
+          <string>V. Unitário</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Valor total</string>
+          <string>QTD</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Total</string>
          </property>
         </column>
        </widget>

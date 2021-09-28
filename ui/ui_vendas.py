@@ -99,11 +99,16 @@ class NovaVenda(QWidget):
         self.btn_add_item.setEnabled(False)
         self.qtd.setText("")
 
+        index = self.lista_produtos.index(self.produtoAtual)
+        p = self.lista_produtos[index]
+        p.quantidade = item.novaQtd()
+        self.atualizaListaProdutos()
+
     def atualizaListaProdutos(self):
         self.combo_produtos.clear()
         lista_combo = []
         for c in self.lista_produtos:
-            lista_combo.append(c.nome)
+            lista_combo.append(c.nomeP)
         self.combo_produtos.addItems(lista_combo)
 
     def limparItens(self):
