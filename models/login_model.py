@@ -20,14 +20,15 @@ def getLogins():
 def getLogin(usuario, senha):
     conn = db.connect_db()
     cursor = conn.cursor()
-    sql = """SELECT nome, usuario, senha FROM Usuarios WHERE usuario = ? AND senha = ?;"""
-    conn.execute(sql, ['adm', '123'])
+    sql = """SELECT * FROM Usuarios WHERE usuario = ? AND senha = ?;"""
+    cursor.execute(sql, [usuario, senha])
     nova_lista = []
-    print(cursor.fetchall())
     for s in cursor.fetchall():
-        user = s[1]
-        password = s[2]
-        new = Login(user, password)
+        id = s[0]
+        nome = s[1]
+        usuario = s[2]
+        senha = s[3]
+        new = Login(id, nome, usuario, senha)
         nova_lista.append(new)
     conn.close()
     return nova_lista

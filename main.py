@@ -34,7 +34,7 @@ class MainWindow(QMainWindow):
         self.nova_lista = []
         self.listWidget.setCurrentRow(0)
         self.listWidget.currentRowChanged.connect(self.display)
-        self.entrar_btn.clicked.connect(self.iniciarSistema)
+        self.entrar_btn.clicked.connect(self.verificaLogin)
         self.cad_btn.clicked.connect(self.cadastro)
         self.login_btn.clicked.connect(self.login)
         self.janela_cadLogin = CadLogin(self)
@@ -43,19 +43,16 @@ class MainWindow(QMainWindow):
     def verificaLogin(self):
         user_login = self.user_login.text()
         pass_login = self.pass_login.text()
-        print(user_login)
-        print(pass_login)
         self.nova_lista = LogModel.getLogin(user_login, pass_login)
-        print(len(self.nova_lista))
-        for usuarios in self.nova_lista:
-            print(usuarios)
-
-
-
+        if len(self.nova_lista) > 0:
+            self.iniciarSistema()
+        else:
+            print("login e senha inválidos")
 
 
     def iniciarSistema(self):
         self.stackedWidget_geral.setCurrentIndex(1)
+        self.carregaJanelas()
     
     def cadastro(self):
         self.stackedWidget_geral.setCurrentIndex(2)
