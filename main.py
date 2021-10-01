@@ -7,6 +7,8 @@ from ui.ui_produtos import CadProdutos
 from ui.ui_clientes import CadClientes
 from ui.ui_vendas import NovaVenda
 from ui.ui_listavendas import ListaVendas
+from ui.ui_login import CadLogin
+import models.login_model as LogModel
 
 from qt_material import apply_stylesheet
 
@@ -28,10 +30,39 @@ class MainWindow(QMainWindow):
         self.listWidget.insertItem(1, "CLIENTES")
         self.listWidget.insertItem(2, "NOVA VENDA")
         self.listWidget.insertItem(3, "LISTA DE VENDAS")
-
+        self.stackedWidget_geral.setCurrentIndex(0)
+        self.nova_lista = []
         self.listWidget.setCurrentRow(0)
-        self.carregaJanelas()
         self.listWidget.currentRowChanged.connect(self.display)
+        self.entrar_btn.clicked.connect(self.iniciarSistema)
+        self.cad_btn.clicked.connect(self.cadastro)
+        self.login_btn.clicked.connect(self.login)
+        self.janela_cadLogin = CadLogin(self)
+        self.nova_lista = []
+
+    def verificaLogin(self):
+        user_login = self.user_login.text()
+        pass_login = self.pass_login.text()
+        print(user_login)
+        print(pass_login)
+        self.nova_lista = LogModel.getLogin(user_login, pass_login)
+        print(len(self.nova_lista))
+        for usuarios in self.nova_lista:
+            print(usuarios)
+
+
+
+
+
+    def iniciarSistema(self):
+        self.stackedWidget_geral.setCurrentIndex(1)
+    
+    def cadastro(self):
+        self.stackedWidget_geral.setCurrentIndex(2)
+
+    def login(self):
+        self.stackedWidget_geral.setCurrentIndex(0)
+
         
 
     def carregaJanelas(self):
